@@ -1,7 +1,7 @@
 import Axios from '@/tool/axios.js';
 import {dateFormat} from '@/tool/transform.js';
 
-export default class Distributor {
+export default class Article {
   constructor(options) {
     options = options || {};
     for (let attr in options) {
@@ -11,14 +11,18 @@ export default class Distributor {
 
   add() {
     return Axios({
-      url: `/api/admin/distributor`,
+      url: `/api/admin/article`,
       method: 'post',
       data: {
-        name: this.name,
-        phone: this.phone,
-        profit: this.profit / 100,
-        username: this.username,
-        password: this.password
+        title: this.title,
+        type: this.type,
+        introduction: this.introduction,
+        url: this.url,
+        points: this.points,
+        imgUrl: this.imgUrl,
+        classify: {
+          id: this.classify.id
+        }
       }
     }).then(
       res => Promise.resolve(res),
@@ -28,13 +32,18 @@ export default class Distributor {
 
   edit() {
     return Axios({
-      url: `/api/admin/distributor/${this.id}`,
+      url: `/api/admin/article/${this.id}`,
       method: 'put',
       data: {
-        name: this.name,
-        phone: this.phone,
-        profit: this.profit / 100,
-        username: this.username
+        title: this.title,
+        type: this.type,
+        introduction: this.introduction,
+        url: this.url,
+        points: this.points,
+        imgUrl: this.imgUrl,
+        classify: {
+          id: this.classify.id
+        }
       }
     }).then(
       res => Promise.resolve(res),
@@ -44,7 +53,7 @@ export default class Distributor {
 
   delete() {
     return Axios({
-      url: `/api/admin/distributor/${this.id}`,
+      url: `/api/admin/article/${this.id}`,
       method: 'delete'
     }).then(
       res => Promise.resolve(res),
@@ -54,7 +63,7 @@ export default class Distributor {
 
   getList() {
     return Axios({
-      url: `/api/admin/distributor`,
+      url: `/api/admin/article`,
       method: 'get'
     }).then(
       res => {

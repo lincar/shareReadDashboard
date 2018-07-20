@@ -1,7 +1,7 @@
 import Axios from '@/tool/axios.js';
 import {dateFormat} from '@/tool/transform.js';
 
-export default class Withdraw {
+export default class Classify {
   constructor(options) {
     options = options || {};
     for (let attr in options) {
@@ -9,13 +9,14 @@ export default class Withdraw {
     }
   }
 
-  agree() {
+  add() {
     return Axios({
-      url: `/api/admin/distributor/withdraw/approve`,
+      url: `/api/admin/article/classify`,
       method: 'post',
-      isFormData: true,
       data: {
-        withdrawId: this.id
+        name: this.name,
+        imgUrl: this.imgUrl,
+        seq: this.seq
       }
     }).then(
       res => Promise.resolve(res),
@@ -23,13 +24,14 @@ export default class Withdraw {
     );
   }
 
-  reject() {
+  edit() {
     return Axios({
-      url: `/api/admin/distributor/withdraw/reject`,
-      method: 'post',
-      isFormData: true,
+      url: `/api/admin/article/classify/${this.id}`,
+      method: 'put',
       data: {
-        withdrawId: this.id
+        name: this.name,
+        imgUrl: this.imgUrl,
+        seq: this.seq
       }
     }).then(
       res => Promise.resolve(res),
@@ -37,11 +39,20 @@ export default class Withdraw {
     );
   }
 
-  getList(search) {
+  delete() {
     return Axios({
-      url: `/api/admin/distributor/withdraw`,
-      method: 'get',
-      params: search
+      url: `/api/admin/article/classify/${this.id}`,
+      method: 'delete'
+    }).then(
+      res => Promise.resolve(res),
+      err => Promise.reject(err)
+    );
+  }
+
+  getList() {
+    return Axios({
+      url: `/api/admin/article/classify`,
+      method: 'get'
     }).then(
       res => {
         res.data.data = res.data.data || [];

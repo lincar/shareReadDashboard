@@ -19,15 +19,15 @@ export const loginRouter = {
 export const otherRouter = {
   path: '/',
   name: 'otherRouter',
-  redirect: '/package/list',
+  redirect: '/article/list',
   component: Main,
   children: [
     {
-      path: 'package/edit',
-      title: '添加套餐',
-      name: 'package-edit',
+      path: 'article/edit',
+      title: '添加文章',
+      name: 'article-edit',
       component: resolve => {
-        require(['./recharge/package/edit.vue'], resolve);
+        require(['./shareRead/article/edit.vue'], resolve);
       }
     }
   ]
@@ -37,69 +37,35 @@ export const otherRouter = {
 //如果想保持组件keep-alive，组件名和name字段保持一致
 export const appRouter = [
   {
-    path: '/package',
+    path: '/classify',
     icon: 'android-folder',
-    name: 'package',
-    title: '套餐管理',
+    name: 'classify',
+    title: '分类管理',
     component: Main,
     children: [
       {
         path: 'list',
-        title: '套餐列表',
-        name: 'package-list',
+        title: '分类列表',
+        name: 'classify-list',
         component: resolve => {
-          require(['./recharge/package/list.vue'], resolve);
+          require(['./shareRead/classify/list.vue'], resolve);
         }
       }
     ]
   },
   {
-    path: '/distributor',
+    path: '/article',
     icon: 'android-folder',
-    name: 'distributor',
-    title: '分销商管理',
+    name: 'article',
+    title: '文章管理',
     component: Main,
     children: [
       {
         path: 'list',
-        title: '分销商列表',
-        name: 'distributor-list',
+        title: '文章列表',
+        name: 'article-list',
         component: resolve => {
-          require(['./recharge/distributor/list.vue'], resolve);
-        }
-      }
-    ]
-  },
-  {
-    path: '/withdraw',
-    icon: 'android-folder',
-    name: 'withdraw',
-    title: '提现管理',
-    component: Main,
-    children: [
-      {
-        path: 'list',
-        title: '提现列表',
-        name: 'withdraw-list',
-        component: resolve => {
-          require(['./recharge/withdraw/list.vue'], resolve);
-        }
-      }
-    ]
-  },
-  {
-    path: '/profit',
-    icon: 'android-folder',
-    name: 'profit',
-    title: '分成管理',
-    component: Main,
-    children: [
-      {
-        path: 'list',
-        title: '分成列表',
-        name: 'profit-list',
-        component: resolve => {
-          require(['./recharge/profit/list.vue'], resolve);
+          require(['./shareRead/article/list.vue'], resolve);
         }
       }
     ]

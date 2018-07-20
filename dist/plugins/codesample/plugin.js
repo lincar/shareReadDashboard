@@ -904,7 +904,7 @@ define(
      *  - Smarter constant and function matching
      *
      * Adds the following new token classes:
-     *  constant, delimiter, variable, function, package
+     *  constant, delimiter, variable, function, article
      */
 
     Prism.languages.php = Prism.languages.extend('clike', {

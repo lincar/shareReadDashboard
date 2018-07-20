@@ -41,7 +41,7 @@ module.exports = merge(webpackBaseConfig, {
     stats: {colors: true},
     proxy: {
       '/api': {
-        target: 'http://www.2around.net',
+        target: 'http://share.topcommmedia.com',
         changeOrigin: true
       }
     }
