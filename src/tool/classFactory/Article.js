@@ -61,10 +61,21 @@ export default class Article {
     );
   }
 
-  getList() {
+  getArticle(){
+    return Axios({
+      url: `/api/admin/article/${this.id}`,
+      method: 'get'
+    }).then(
+      res => Promise.resolve(res),
+      err => Promise.reject(err)
+    );
+  }
+
+  getList(search) {
     return Axios({
       url: `/api/admin/article`,
-      method: 'get'
+      method: 'get',
+      params: search
     }).then(
       res => {
         res.data.data = res.data.data || [];
