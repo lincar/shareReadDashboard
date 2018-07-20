@@ -29,22 +29,22 @@
         </div>
         <div class="edit-modal-item">
           <span class="plr-sm">标题</span>
-          <el-input v-model="articleItem.title" class="w-5"></el-input>
+          <el-input v-model="articleItem.title" class="w-10"></el-input>
         </div>
         <div class="edit-modal-item">
           <span class="plr-sm">简介</span>
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="articleItem.introduction" class="w-5"></el-input>
+          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="articleItem.introduction" class="w-10"></el-input>
         </div>
         <div class="edit-modal-item">
           <span class="plr-sm">分类</span>
-          <el-select v-model="articleItem.classifyId" class="w-5">
+          <el-select v-model="articleItem.classifyId" class="w-10">
             <el-option :value="1" label="话费"></el-option>
             <el-option :value="2" label="流量"></el-option>
           </el-select>
         </div>
         <div class="edit-modal-item">
           <span class="plr-sm">积分</span>
-          <el-input type="number" v-model="articleItem.points" class="w-5"></el-input>
+          <el-input type="number" v-model="articleItem.points" class="w-10"></el-input>
         </div>
       </div>
       <div slot="footer" class="text-center">
@@ -174,7 +174,6 @@
     display: flex;
     align-items: center;
     padding: var(--sm);
-    margin-left: 15%;
   }
 
   .edit-modal-item span {
