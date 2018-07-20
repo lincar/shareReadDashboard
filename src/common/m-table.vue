@@ -27,10 +27,17 @@
   .table-td {
     flex: 1 0 15%;
     text-align: center;
+    margin-right: 10px;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
 
   .table-td img {
-    width: 40px;
+    width: 100px;
     display: block;
     margin: 0 auto;
   }

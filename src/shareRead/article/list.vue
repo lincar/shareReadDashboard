@@ -5,6 +5,10 @@
       <router-link to="/article/edit">
         <el-button class="mlr-sm" size="small" type="primary">添加文章</el-button>
       </router-link>
+      <el-select @change="getArticleList" v-model="search.type">
+        <el-option :value="1" label="文章"></el-option>
+        <el-option :value="2" label="轮播图"></el-option>
+      </el-select>
     </header>
     <my-table :data="articleList" :config="tableConfig">
       <div slot="operating" slot-scope="article">
@@ -35,6 +39,7 @@
     data() {
       return {
         search: {
+          type: 1,
           page: 1,
           pageSize: 15
         },
@@ -72,6 +77,57 @@
 
     components: {
       myTable
+    },
+
+    watch: {
+      'search.type': function (val) {
+        let tableConfig = [
+          {
+            label: '封面',
+            property: '',
+            img: 'imgUrl'
+          },
+          {
+            label: '标题',
+            property: 'title'
+          },
+          {
+            label: '简介',
+            property: 'introduction'
+          },
+          {
+            label: '分类',
+            property: 'classify.name'
+          },
+          {
+            label: '积分',
+            property: 'points'
+          },
+          {
+            label: '操作',
+            type: 'operating'
+          }
+        ];
+
+        if (val === 2) {
+          tableConfig = [
+            {
+              label: '封面',
+              property: '',
+              img: 'imgUrl'
+            },
+            {
+              label: '积分',
+              property: 'points'
+            },
+            {
+              label: '操作',
+              type: 'operating'
+            }
+          ];
+        }
+        this.tableConfig = tableConfig;
+      }
     },
 
     activated() {

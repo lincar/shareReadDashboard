@@ -11,19 +11,26 @@
           action="/api/upload"
           :show-file-list="false"
           :on-success="handleUploadSuccess">
-          <img v-if="article.imgUrl" :src="article.imgUrl" class="upload-img">
+          <img v-if="article.imgUrl" :src="article.imgUrl" :class="{'banner-img':article.type===2,'article-img':article.type===1}">
           <i v-else class="el-icon-plus img-uploader-icon"></i>
         </el-upload>
       </div>
       <div class="edit-modal-item">
+        <span class="plr-sm">类型</span>
+        <el-select v-model="article.type" class="w-6">
+          <el-option :value="1" label="文章"></el-option>
+          <el-option :value="2" label="轮播图"></el-option>
+        </el-select>
+      </div>
+      <div v-if="article.type === 1" class="edit-modal-item">
         <span class="plr-sm">标题</span>
         <el-input v-model="article.title" class="w-6"></el-input>
       </div>
-      <div class="edit-modal-item">
+      <div v-if="article.type === 1" class="edit-modal-item">
         <span class="plr-sm">简介</span>
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="article.introduction" class="w-6"></el-input>
       </div>
-      <div v-if="article.classify" class="edit-modal-item">
+      <div v-if="article.type === 1" class="edit-modal-item">
         <span class="plr-sm">分类</span>
         <el-select v-model="article.classify.id" class="w-6">
           <el-option v-for="item in classifyList" :value="item.id" :label="item.name"></el-option>
@@ -36,13 +43,6 @@
       <div class="edit-modal-item">
         <span class="plr-sm">链接</span>
         <el-input v-model="article.url" class="w-6"></el-input>
-      </div>
-      <div v-if="article.classify" class="edit-modal-item">
-        <span class="plr-sm">类型</span>
-        <el-select v-model="article.type" class="w-6">
-          <el-option :value="1" label="文章"></el-option>
-          <el-option :value="2" label="轮播图"></el-option>
-        </el-select>
       </div>
       <div class="w-6 ptb-md text-center">
         <el-button @click="commitArticle()" type="primary">保存</el-button>
@@ -93,6 +93,9 @@
       commitArticle() {
         const that = this;
         let article = new Article(that.article);
+        if (article.type === 2) {
+          delete article.classify;
+        }
         let thenObj = null;
         if (article.id) {
           thenObj = article.edit();
@@ -100,6 +103,7 @@
           thenObj = article.add();
         }
         thenObj.then(() => {
+          that.clearArticle();
           that.$router.push('/article/list');
         });
       },
@@ -157,9 +161,17 @@
     text-align: center;
   }
 
-  .upload-img {
+  .banner-img {
+    width: 200px;
+    height: 120px;
+    display: block;
+    object-fit: cover;
+  }
+
+  .article-img {
     width: 180px;
     height: 136px;
     display: block;
+    object-fit: cover;
   }
 </style>

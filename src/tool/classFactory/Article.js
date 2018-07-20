@@ -10,20 +10,25 @@ export default class Article {
   }
 
   add() {
+    let data = {
+      title: this.title,
+      type: this.type,
+      introduction: this.introduction,
+      url: this.url,
+      points: this.points,
+      imgUrl: this.imgUrl
+    };
+
+    if (data.type === 1) {
+      data.classify = {
+        id: this.classify.id
+      }
+    }
+
     return Axios({
       url: `/api/admin/article`,
       method: 'post',
-      data: {
-        title: this.title,
-        type: this.type,
-        introduction: this.introduction,
-        url: this.url,
-        points: this.points,
-        imgUrl: this.imgUrl,
-        classify: {
-          id: this.classify.id
-        }
-      }
+      data
     }).then(
       res => Promise.resolve(res),
       err => Promise.reject(err)
@@ -31,20 +36,25 @@ export default class Article {
   }
 
   edit() {
+    let data = {
+      title: this.title,
+      type: this.type,
+      introduction: this.introduction,
+      url: this.url,
+      points: this.points,
+      imgUrl: this.imgUrl
+    };
+
+    if (data.type === 1) {
+      data.classify = {
+        id: this.classify.id
+      }
+    }
+
     return Axios({
       url: `/api/admin/article/${this.id}`,
       method: 'put',
-      data: {
-        title: this.title,
-        type: this.type,
-        introduction: this.introduction,
-        url: this.url,
-        points: this.points,
-        imgUrl: this.imgUrl,
-        classify: {
-          id: this.classify.id
-        }
-      }
+      data
     }).then(
       res => Promise.resolve(res),
       err => Promise.reject(err)
@@ -61,7 +71,7 @@ export default class Article {
     );
   }
 
-  getArticle(){
+  getArticle() {
     return Axios({
       url: `/api/admin/article/${this.id}`,
       method: 'get'
