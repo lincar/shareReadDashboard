@@ -153,12 +153,7 @@
           }
         });
         list.sort((x, y) => {
-          let typeFlag = x.type - y.type;
-          let seqFlag = x.seq - y.seq;
-          if (!typeFlag) {
-            return seqFlag;
-          }
-          return typeFlag;
+          return x.seq - y.seq;
         });
       },
 
