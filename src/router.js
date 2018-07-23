@@ -69,6 +69,23 @@ export const appRouter = [
         }
       }
     ]
+  },
+  {
+    path: '/product',
+    icon: 'android-folder',
+    name: 'product',
+    title: '套餐管理',
+    component: Main,
+    children: [
+      {
+        path: 'list',
+        title: '套餐列表',
+        name: 'product-list',
+        component: resolve => {
+          require(['./shareRead/product/list.vue'], resolve);
+        }
+      }
+    ]
   }
 ];
 
