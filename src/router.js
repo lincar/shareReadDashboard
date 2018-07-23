@@ -86,6 +86,23 @@ export const appRouter = [
         }
       }
     ]
+  },
+  {
+    path: '/lottery',
+    icon: 'android-folder',
+    name: 'lottery',
+    title: '奖品管理',
+    component: Main,
+    children: [
+      {
+        path: 'list',
+        title: '奖品列表',
+        name: 'lottery-list',
+        component: resolve => {
+          require(['./shareRead/lottery/list.vue'], resolve);
+        }
+      }
+    ]
   }
 ];
 
