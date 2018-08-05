@@ -105,6 +105,23 @@ export const appRouter = [
     ]
   },
   {
+    path: '/recharge',
+    icon: 'android-folder',
+    name: 'recharge',
+    title: '充值管理',
+    component: Main,
+    children: [
+      {
+        path: 'list',
+        title: '充值列表',
+        name: 'recharge-list',
+        component: resolve => {
+          require(['./shareRead/recharge/list.vue'], resolve);
+        }
+      }
+    ]
+  },
+  {
     path: '/settings',
     icon: 'android-folder',
     name: 'settings',
