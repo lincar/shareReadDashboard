@@ -50,6 +50,11 @@
           {
             label: '充值时间',
             property: 'createdAt'
+          },
+          {
+            label: '订单状态',
+            property: 'statusObj',
+            color: true
           }
         ]
       }
@@ -64,10 +69,54 @@
     },
 
     methods: {
+      toStatusObj(status) {
+        let name = '';
+        let color = '';
+        switch (status) {
+          case 1 :
+            name = '未支付';
+            color = '#a4a4a4';
+            break;
+          case 2 :
+            name = '已支付';
+            color = 'inherit';
+            break;
+          case 3 :
+            name = '已提交';
+            color = '#2d8cf0';
+            break;
+          case 4 :
+            name = '充值成功';
+            color = '#19be6b';
+            break;
+          case 5 :
+            name = '充值失败';
+            color = '#ff3f66';
+            break;
+          case 6 :
+            name = '退款中';
+            color = '#2d8cf0';
+            break;
+          case 7 :
+            name = '已退款';
+            color = '#ffad33';
+            break;
+        }
+        return {value: name, color};
+      },
+
+      filterRechargeList(list) {
+        const that = this;
+        list.map(item => {
+          item.statusObj = that.toStatusObj(item.status);
+        });
+      },
+
       getRechargeList() {
         const that = this;
         Recharge.prototype.getList(that.search).then(res => {
           let list = res.data.data || [];
+          that.filterRechargeList(list);
           that.rechargeList.splice(0, that.rechargeList.length, ...list);
           that.rechargeSum = res.data.extra.count || list.length;
         });
