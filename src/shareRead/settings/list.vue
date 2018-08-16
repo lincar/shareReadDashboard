@@ -19,6 +19,10 @@
         </el-col>
       </el-row>
       <el-row class="y-center ptb-md">
+        <div class="plr-md">分享标题</div>
+        <el-input class="w-5" v-model="settings.shareTitle"></el-input>
+      </el-row>
+      <el-row class="y-center ptb-md">
         <div class="plr-md">温馨提示</div>
         <el-input
           class="w-5"
